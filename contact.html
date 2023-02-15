@@ -30,11 +30,11 @@
                 <ul class="navbar-nav me-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link active text-light p-3" aria-current="page" href="#">Home</a>
+                        <a class="nav-link text-light p-3" href="./index.html">Home</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-light p-3"  href="./upcomingEvents.html">Upcoming Events</a>
+                        <a class="nav-link text-light p-3" href="./upcomingEvents.html">Upcoming Events</a>
                     </li>
                     
                     <li class="nav-item">
@@ -42,7 +42,7 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link text-light p-3" href="./contact.html">Contact</a>
+                        <a class="nav-link active text-light p-3" aria-current="page"  href="#">Contact</a>
                     </li>
                     
                     <li class="nav-item">
@@ -56,112 +56,30 @@
     </nav>
         <div class="container titleContainer">
           <div class="row titleRow">
-            <div class="col arrowLeft"><a href="">||</a></div>
-            <div class="col title"><h2>HOME</h2></div>
-            <div class="col arrowRight"><a href="./upcomingEvents.html">></a></div>
+            <div class="col arrowLeft"><a href="./pastEvents.html"><</a></div>
+            <div class="col title"><h2>CONTACT</h2></div>
+            <div class="col arrowRight"><a href="./stats.html">></a></div>
           </div>
         </div>
     </header>
     <main>
-      <div class="mainContainer">
-        <div class="row mainContainerSearchRow">
-          <div class="col">
-            <div class="row mainContainerSearchRow__checkboxesRow">
-              <div class="col category"><input type="checkbox" name="category" id="" class="checkbox"> Category</div>
-              <div class="col category"><input type="checkbox" name="category" id="" class="checkbox"> Category</div>
-              <div class="col category"><input type="checkbox" name="category" id="" class="checkbox"> Category</div>
-              <div class="col category"><input type="checkbox" name="category" id="" class="checkbox"> Category</div>
-              <div class="col category"><input type="checkbox" name="category" id="" class="checkbox"> Category</div>
-            </div>
+      <div class="mainContainer contactContainer">
+        <form class="contactForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name">
           </div>
-          <div class="col">
-            <div class="row mainContainerSearchRow__searchRow">
-              <div class="col searchInput"><input type="text" name="" id=""></div>
-              <div class="col searchButton"><button>🔍</button></div>
-            </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
-        </div>
-        <div class="row mainContainerCardsRow">
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="./assets/img/Costume_Party.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Costume Party</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div class="cardFooter">
-                  <p>Price: $45.00</p>
-                  <a href="#" class="btn btn-primary card-btn">More Info</a>
-                </div>
-                
-              </div>
-            </div>
+          <div class="mb-3">
+            <label for="textInput" class="form-label">Message</label>
+            <textarea rows="5" class="form-control" id="textInput"></textarea>
           </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="./assets/img/Marathon.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Marathon</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div class="cardFooter">
-                  <p>Price: $35.00</p>
-                  <a href="#" class="btn btn-primary card-btn">More Info</a>
-                </div>
-              </div>
-            </div>
-          </div>            
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="./assets/img/Museum_Tour.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Museum Tour</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div class="cardFooter">
-                  <p>Price: $30.00</p>
-                  <a href="#" class="btn btn-primary card-btn">More Info</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="./assets/img/Music_Concert.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Music Concert</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div class="cardFooter">
-                  <p>Price: $40.00</p>
-                  <a href="#" class="btn btn-primary card-btn">More Info</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="./assets/img/Cinema.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Cinema</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div class="cardFooter">
-                  <p>Price: $40.00</p>
-                  <a href="#" class="btn btn-primary card-btn">More Info</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="./assets/img/Food_Fair.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Food Fair</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <div class="cardFooter">
-                  <p>Price: $40.00</p>
-                  <a href="#" class="btn btn-primary card-btn">More Info</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          <button type="submit" class="btn btn-primary contactSubmit">Submit</button>
+        </form>
       </div>
     </main>
     <footer>
