@@ -124,14 +124,13 @@ accent-color: #591C38;
     padding-top: 5vh;
     width: 80vw;
     margin: auto;
-    gap: 3rem;
 }
 
 .card{
-    width: 20vw!important;
-    height: 55vh;
     background-color: #59012A;
     color: #D90368;
+    margin-bottom: 3rem;
+    align-items: center;
 }
 
 .card img{
@@ -268,4 +267,22 @@ footer{
 
 .footerSignature{
     color: #D90368;
+}
+
+@media screen and (max-width:767px){
+    .logo{
+        width: 60vw;
+    }
+
+    .mainContainerSearchRow{
+        flex-direction: column-reverse;
+    }
+
+    .searchInput input{
+        width: 100%;
+    }
+
+    .category{
+        width: 30%;
+    }
 }
