@@ -1,4 +1,4 @@
-// Copiar el array de objetos con la información de Amazing Events e iterar entre ellas y dependiendo la fecha mostrar las cards en una u otra sección de la pagina.--
+//Events:
 const eventsDB = {
   "currentDate": "2022-09-01",
   "events": [
@@ -449,13 +449,42 @@ const eventsDB = {
   ]
 };
 
-//Home events variables
+//Categories variables:
+let allCategories = [];
+let allCategoriesHTML = "";
+let allCategoriesContainer = document.getElementById("allCategoriesContainer");
 
+//Home events variables:
 let allCards = "";
 let allCardsContainer = document.getElementById("allCardsContainer");
 
-//Home events cards display functions:
+//Categories Functions:
+function createAllCategories(){
+  for(event_ of eventsDB.events){
+    allCategories.push(event_.category)
+  }
+}
 
+function removeDuplicates(arr){
+  return arr.filter((item, 
+    index) => arr.indexOf(item) === index);
+}
+
+//Creating the categories array without repeated values:
+createAllCategories();
+let noRepeatCategories = removeDuplicates(allCategories);
+
+function createNoRepeatCategories(){
+  for(category of noRepeatCategories){ 
+    allCategoriesHTML += `<div class="col-sm-4 category"><input type="checkbox" name="category" class="checkbox">${category}</div>`
+  }
+}
+
+function paintCategories(){
+  allCategoriesContainer.innerHTML = allCategoriesHTML;
+}
+
+//Home events cards display functions:
 function createAllCards() {
   for (event_ of eventsDB.events) {
     allCards += 
@@ -484,3 +513,9 @@ function paintAllCards(){
 
 createAllCards();
 paintAllCards();
+
+
+createNoRepeatCategories();
+paintCategories();
+
+
