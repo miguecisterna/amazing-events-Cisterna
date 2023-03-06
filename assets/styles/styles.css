@@ -131,6 +131,7 @@ accent-color: #591C38;
     color: #D90368;
     margin-bottom: 3rem;
     align-items: center;
+    height: 100%;
 }
 
 .card img{
@@ -164,6 +165,10 @@ accent-color: #591C38;
     box-shadow: -7px -7px 8px -4px rgba(0,0,0,0.58);
     -webkit-box-shadow: -7px -7px 8px -4px rgba(0,0,0,0.58);
     -moz-box-shadow: -7px -7px 8px -4px rgba(0,0,0,0.58);
+}
+
+.cardCont{
+    margin-bottom: 3rem;
 }
 
 /*Contact Section Styles*/

@@ -1,3 +1,7 @@
+//Filter variables:
+let search = document.getElementById("search");
+let filteredArr = [];
+
 //Categories Functions
 function createNoRepeatCategories(){
     for(category of noRepeatCategories){ 
@@ -14,14 +18,15 @@ function createNoRepeatCategories(){
 
 let upcomingCards = "";
 let upcomingCardsContainer = document.getElementById("upcomingCardsContainer");
+let upcomingEvents = [];
 
 //Upcoming events cards display functions:
 
-function createUpcomingCards() {
-    for (event_ of eventsDB.events) {
-    if (eventsDB.currentDate < event_.date) {
+function createUpcomingCards(arr) {
+    upcomingCards ="";
+    for (event_ of arr) {
         upcomingCards += 
-        `<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+        `<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 cardCont">
             <div class="card">
                 <img src="${event_.image}">
                 <div class="card-body">
@@ -35,18 +40,50 @@ function createUpcomingCards() {
             </div>
         </div>`;
     }
-    }
 }
 
-function paintUpcomigCards(){
+function filterUpcomingEvents(events){
+    for(event_ of events){
+        if(event_.date > today){
+            upcomingEvents.push(event_);
+        }
+    }
+    console.log(upcomingEvents);
+}
+
+function paintUpcomingCards(){
     upcomingCardsContainer.innerHTML = upcomingCards;
 }
+
+//Filter fx:
+function filtraPorNombre(nombre,eventos){
+    let lista = [];
+
+    for(event_ of eventos){
+
+    if(event_.name.toLowerCase().includes(nombre)){
+        lista.push(event_);
+    }
+
+    }
+    console.log(lista);
+    return lista;
+}
+
+search.addEventListener("keyup", () =>{
+
+    createUpcomingCards(filtraPorNombre(search.value.toLowerCase(), upcomingEvents));
+    paintUpcomingCards();
+
+
+});
 
 
 //Calling the functions:
 
-createUpcomingCards();
-paintUpcomigCards();
+filterUpcomingEvents(eventsDB.events);
+createUpcomingCards(upcomingEvents);
+paintUpcomingCards();
 
 createNoRepeatCategories();
 paintCategories();

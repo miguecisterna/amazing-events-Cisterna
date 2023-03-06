@@ -452,6 +452,7 @@ const eventsDB = {
 let allCategories = [];
 let allCategoriesHTML = "";
 let allCategoriesContainer = document.getElementById("allCategoriesContainer");
+const today = eventsDB.currentDate;
 
 //Categories Functions:
 function createAllCategories(){
