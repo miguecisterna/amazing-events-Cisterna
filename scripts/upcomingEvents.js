@@ -12,7 +12,7 @@ function createNoRepeatCategories(){
     </div>`
     }
 }
-    
+
 function paintCategories(){
     allCategoriesContainer.innerHTML = allCategoriesHTML;
 }
@@ -59,7 +59,7 @@ function filterUpcomingEvents(events){
             upcomingEvents.push(event_);
         }
     }
-    console.log(upcomingEvents);
+
 }
 
 function paintUpcomingCards(){
@@ -96,7 +96,6 @@ checkedRefe.addEventListener("click",(e) => {
 
     if(e.target.checked){
         checkedCategories.push(e.target.value);
-        console.log(e.target)
         //createCheckedCategoryCards(checkedCategories);
         //paintAllCards();
     }
@@ -139,7 +138,6 @@ function filterAlmacen(){
     upcomingCardsContainer.innerHTML = createUpcomingCards(filtradoPorCheckbar);
     let controlFinal2 = filtradoPorCheckbar.filter(fs => fs.name.toLowerCase().includes(listenerValue.toString()));
     upcomingCardsContainer.innerHTML = createUpcomingCards(controlFinal2);
-    console.log(controlFinal2);
     }
     if (upcomingCardsContainer.innerHTML.length == 0){
     upcomingCardsContainer.innerHTML =
@@ -153,8 +151,6 @@ function filterAlmacen(){
         </div>
     </div`;
     }
-
-
 }
 
 

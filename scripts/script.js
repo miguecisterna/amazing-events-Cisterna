@@ -51,7 +51,6 @@ checkedRefe.addEventListener("click",(e) => {
 
     if(e.target.checked){
       checkedCategories.push(e.target.value);
-      console.log(e.target)
       //createCheckedCategoryCards(checkedCategories);
       //paintAllCards();
     }
@@ -170,7 +169,6 @@ function filterAlmacen(){
     allCardsContainer.innerHTML = createAllCards(filtradoPorCheckbar);
     let controlFinal2 = filtradoPorCheckbar.filter(fs => fs.name.toLowerCase().includes(listenerValue.toString()));
     allCardsContainer.innerHTML = createAllCards(controlFinal2);
-    console.log(controlFinal2);
   }
   if (allCardsContainer.innerHTML.length == 0){
     allCardsContainer.innerHTML =
