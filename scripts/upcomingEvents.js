@@ -34,7 +34,7 @@ function createUpcomingCards(arr) {
                     <p class="card-text">${event_.description}</p>
                     <div class="cardFooter">
                         <p>Price: $${event_.price}</p>
-                        <a href="#" class="btn btn-primary card-btn">More Info</a>
+                        <a href="./details.html?id=${event_._id}" class="btn btn-primary card-btn">More Info</a>
                     </div>
                 </div>
             </div>
