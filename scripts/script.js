@@ -51,6 +51,7 @@ checkedRefe.addEventListener("click",(e) => {
 
     if(e.target.checked){
       checkedCategories.push(e.target.value);
+      console.log(e.target)
       //createCheckedCategoryCards(checkedCategories);
       //paintAllCards();
     }

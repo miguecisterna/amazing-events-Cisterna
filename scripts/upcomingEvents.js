@@ -6,13 +6,16 @@ let listenerValue = "";
 //Categories Functions
 function createNoRepeatCategories(){
     for(category of noRepeatCategories){ 
-        allCategoriesHTML += `<div class="col-sm-4 category"><input type="checkbox" name="category" class="checkbox">${category}</div>`
+    allCategoriesHTML += 
+    `<div class="col-sm-4 category" id="category">
+        <input type="checkbox" name="category" class="checkbox" id="${category}" value="${category}">${category}
+    </div>`
     }
 }
     
-    function paintCategories(){
+function paintCategories(){
     allCategoriesContainer.innerHTML = allCategoriesHTML;
-    }
+}
 
 
 //Upcoming events variables
@@ -93,6 +96,7 @@ checkedRefe.addEventListener("click",(e) => {
 
     if(e.target.checked){
         checkedCategories.push(e.target.value);
+        console.log(e.target)
         //createCheckedCategoryCards(checkedCategories);
         //paintAllCards();
     }
@@ -133,7 +137,6 @@ function filterAlmacen(){
     }
     if(checkedCategories.length > 0){
     upcomingCardsContainer.innerHTML = createUpcomingCards(filtradoPorCheckbar);
-    console.log(filtradoPorCheckbar);
     let controlFinal2 = filtradoPorCheckbar.filter(fs => fs.name.toLowerCase().includes(listenerValue.toString()));
     upcomingCardsContainer.innerHTML = createUpcomingCards(controlFinal2);
     console.log(controlFinal2);
