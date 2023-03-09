@@ -171,6 +171,18 @@ function filterAlmacen(){
     allCardsContainer.innerHTML = createAllCards(controlFinal2);
     console.log(controlFinal2);
   }
+  if (allCardsContainer.innerHTML.length == 0){
+    allCardsContainer.innerHTML =
+    `<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 cardCont">
+      <div class="card">
+        <img src="./assets/img/AmazingNotFound.png" class="nfImage">
+        <div class="card-body nfCardBody">
+          <h5 class="card-title">Ups!</h5>
+          <p class="card-text centText">There are no Events that match your search.</p>
+        </div>
+      </div>
+    </div`;
+  }
 
 
 }

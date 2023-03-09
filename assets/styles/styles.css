@@ -143,6 +143,12 @@ accent-color: #591C38;
     -moz-box-shadow: -7px -7px 8px -4px rgba(0,0,0,0.58);
 }
 
+.nfImage{
+    box-shadow: -7px -7px 8px -4px rgba(0, 0, 0, 0)!important;
+    -webkit-box-shadow: -7px -7px 8px -4px rgba(0, 0, 0, 0)!important;
+    -moz-box-shadow: -7px -7px 8px -4px rgba(0, 0, 0, 0)!important;
+}
+
 .card-body{
     display: flex;
     flex-direction: column;
@@ -169,6 +175,10 @@ accent-color: #591C38;
 
 .cardCont{
     margin-bottom: 3rem;
+}
+
+#allCardsContainer{
+    justify-content: center;
 }
 
 /*Contact Section Styles*/
@@ -272,6 +282,14 @@ footer{
 
 .footerSignature{
     color: #D90368;
+}
+
+.nfCardBody{
+    padding-top: 3rem;
+}
+
+.centText{
+    text-align: center;
 }
 
 @media screen and (max-width:767px){
