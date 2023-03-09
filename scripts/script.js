@@ -167,9 +167,9 @@ function filterAlmacen(){
   }
   if(checkedCategories.length > 0){
     allCardsContainer.innerHTML = createAllCards(filtradoPorCheckbar);
-    // let controlFinal = filtradoPorCheckbar.filter(fs => fs.name.includes(listenerValue));
-    // console.log(controlFinal);
-    console.log("chequeaste wey");
+    let controlFinal2 = filtradoPorCheckbar.filter(fs => fs.name.toLowerCase().includes(listenerValue.toString()));
+    allCardsContainer.innerHTML = createAllCards(controlFinal2);
+    console.log(controlFinal2);
   }
 
 
