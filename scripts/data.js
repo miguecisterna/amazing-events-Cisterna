@@ -449,6 +449,7 @@ const eventsDB = {
 };
 
 //Categories variables:
+let events = eventsDB.events;
 let allCategories = [];
 let allCategoriesHTML = "";
 let allCategoriesContainer = document.getElementById("allCategoriesContainer");

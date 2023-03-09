@@ -5,10 +5,11 @@ let allCardsContainer = document.getElementById("allCardsContainer");
 //Filter variables:
 let search = document.getElementById("search");
 let filteredArr = [];
+let listenerValue = "";
 
 //Filter by categories variables:
-let selectedCategories = [];
 let checkedCategories = [];
+let checkedevents = [];
 let checkedRefe = document.getElementById("allCategoriesContainer");
 
 //Categories Functions
@@ -21,28 +22,28 @@ function createNoRepeatCategories(){
   }
 }
 
-function createCheckedCategoryCards(arr){
-  allCards="";
-  allCardsContainer.innerHTML = "";
-  for(event_ of eventsDB.events){
-    if(arr.includes(event_.category)){
-      allCards += 
-      `<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 cardCont">
-      <div class="card">
-        <img src="${event_.image}">
-        <div class="card-body">
-          <h5 class="card-title">${event_.name}</h5>
-          <p class="card-text">${event_.description}</p>
-          <div class="cardFooter">
-            <p>Price: $${event_.price}</p>
-            <a href="./details.html" class="btn btn-primary card-btn">More Info</a>
-          </div>
-        </div>
-      </div>
-    </div>`;
-    }
-  }
-}
+// function createCheckedCategoryCards(arr){
+//   allCards="";
+//   allCardsContainer.innerHTML = "";
+//   for(event_ of eventsDB.events){
+//     if(arr.includes(event_.category)){
+//       allCards += 
+//       `<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 cardCont">
+//       <div class="card">
+//         <img src="${event_.image}">
+//         <div class="card-body">
+//           <h5 class="card-title">${event_.name}</h5>
+//           <p class="card-text">${event_.description}</p>
+//           <div class="cardFooter">
+//             <p>Price: $${event_.price}</p>
+//             <a href="./details.html" class="btn btn-primary card-btn">More Info</a>
+//           </div>
+//         </div>
+//       </div>
+//     </div>`;
+//     }
+//   }
+// }
 
 checkedRefe.addEventListener("click",(e) => {
 
@@ -50,21 +51,22 @@ checkedRefe.addEventListener("click",(e) => {
 
     if(e.target.checked){
       checkedCategories.push(e.target.value);
-      createCheckedCategoryCards(checkedCategories);
-      paintAllCards();
+      //createCheckedCategoryCards(checkedCategories);
+      //paintAllCards();
     }
     else{
       let index = checkedCategories.indexOf(e.target.value);
       let x = checkedCategories.splice(index, 1);
-      createCheckedCategoryCards(checkedCategories);
-      paintAllCards();
+      //createCheckedCategoryCards(checkedCategories);
+      //paintAllCards();
     }
-    console.log(checkedCategories);
+
+    filterAlmacen();
   }
-  if(checkedCategories.length === 0){
-    createAllCards(eventsDB.events);
-    paintAllCards();
-  }
+  //if(checkedCategories.length === 0){
+  //createAllCards(eventsDB.events);
+  //paintAllCards();
+  //}
 
 })
 
@@ -72,20 +74,11 @@ function paintCategories(){
   allCategoriesContainer.innerHTML = allCategoriesHTML;
 }
 
-function createCategoriesSelected(){
-
-    for(category of noRepeatCategories){
-      selectedCategories.push(category);
-    }
-    
-  console.log([selectedCategories]);
-}
-
-
 //Home events cards display functions:
+
 function createAllCards(arr) {
   allCards="";
-  allCardsContainer.innerHTML = "";
+
   for (event_ of arr) {
     allCards += 
     `<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 cardCont">
@@ -103,6 +96,7 @@ function createAllCards(arr) {
     </div>`;
     
   }
+  return allCards;
 }
 
 function paintAllCards(){
@@ -117,15 +111,18 @@ function filtraPorNombre(nombre,eventos){
 
     if(event_.name.toLowerCase().includes(nombre)){
       lista.push(event_);
-      console.log(nombre);
-      console.log(event_.name);
-      console.log("condicion del if " + event_.name.includes(nombre));
+      // console.log(nombre);
+      // console.log(event_.name);
+      // console.log("condicion del if " + event_.name.includes(nombre));
     }
 
   }
-  console.log(lista);
+  // console.log(lista);
   return lista;
 }
+
+
+
 
 // function checkboxFilter(lista, evento){
 //   let lista = [];
@@ -137,22 +134,53 @@ function filtraPorNombre(nombre,eventos){
 //   }
 // }
 
-search.addEventListener("keyup", () =>{
-
-  createAllCards(filtraPorNombre(search.value.toLowerCase(), eventsDB.events));
-  paintAllCards();
-
-
+search.addEventListener("keyup", (e) =>{
+  // if(checkedCategories.length === 0){
+  //   createAllCards(filtraPorNombre(search.value.toLowerCase(), eventsDB.events));
+  //   paintAllCards();
+  // }else{
+  //   createAllCards(filtraPorNombre(search.value.toLowerCase(), checkedEvents));
+  //   paintAllCards();
+  // }
+  listenerValue = e.target.value;
+  filterAlmacen();
 });
+
+function filterAlmacen(){
+  let filtradoPorSearchbar = events.filter(e => e.name.toLowerCase().includes(listenerValue));
+  let filtradoPorCheckbar = events.filter(e => checkedCategories.includes(e.category));
+  
+  // console.log(filtradoPorSearchbar);
+  // console.log(filtradoPorCheckbar);
+  // console.log(filtradoPorCheckbar.forEach());
+  // console.log(events);
+  // console.log(checkedCategories);
+
+  if(listenerValue.length > 0){
+    // createAllCards(filtradoPorSearchbar);
+    // paintAllCards();
+    allCardsContainer.innerHTML = createAllCards(filtradoPorSearchbar);
+    let controlFinal = filtradoPorSearchbar.filter(fs => fs.category.includes(checkedCategories.toString()));
+    allCardsContainer.innerHTML = createAllCards(controlFinal);
+  }else if(listenerValue.length == 0){
+    allCardsContainer.innerHTML = createAllCards(events);
+  }
+  if(checkedCategories.length > 0){
+    allCardsContainer.innerHTML = createAllCards(filtradoPorCheckbar);
+    // let controlFinal = filtradoPorCheckbar.filter(fs => fs.name.includes(listenerValue));
+    // console.log(controlFinal);
+    console.log("chequeaste wey");
+  }
+
+
+}
 
 //Calling the functions:
 
-createAllCards(eventsDB.events);
+createAllCards(events);
 paintAllCards();
 
 createNoRepeatCategories();
 paintCategories();
-
-createCategoriesSelected();
 
 
