@@ -14,6 +14,7 @@ let checkedRefe = document.getElementById("allCategoriesContainer");
 
 //Categories Functions
 function createNoRepeatCategories(){
+
   for(category of noRepeatCategories){ 
     allCategoriesHTML += 
     `<div class="col-sm-4 category" id="category">
@@ -22,28 +23,6 @@ function createNoRepeatCategories(){
   }
 }
 
-// function createCheckedCategoryCards(arr){
-//   allCards="";
-//   allCardsContainer.innerHTML = "";
-//   for(event_ of eventsDB.events){
-//     if(arr.includes(event_.category)){
-//       allCards += 
-//       `<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 cardCont">
-//       <div class="card">
-//         <img src="${event_.image}">
-//         <div class="card-body">
-//           <h5 class="card-title">${event_.name}</h5>
-//           <p class="card-text">${event_.description}</p>
-//           <div class="cardFooter">
-//             <p>Price: $${event_.price}</p>
-//             <a href="./details.html" class="btn btn-primary card-btn">More Info</a>
-//           </div>
-//         </div>
-//       </div>
-//     </div>`;
-//     }
-//   }
-// }
 
 checkedRefe.addEventListener("click",(e) => {
 
@@ -51,22 +30,16 @@ checkedRefe.addEventListener("click",(e) => {
 
     if(e.target.checked){
       checkedCategories.push(e.target.value);
-      //createCheckedCategoryCards(checkedCategories);
-      //paintAllCards();
+
     }
     else{
       let index = checkedCategories.indexOf(e.target.value);
       let x = checkedCategories.splice(index, 1);
-      //createCheckedCategoryCards(checkedCategories);
-      //paintAllCards();
+
     }
 
     filterAlmacen();
   }
-  //if(checkedCategories.length === 0){
-  //createAllCards(eventsDB.events);
-  //paintAllCards();
-  //}
 
 })
 
@@ -111,37 +84,16 @@ function filtraPorNombre(nombre,eventos){
 
     if(event_.name.toLowerCase().includes(nombre)){
       lista.push(event_);
-      // console.log(nombre);
-      // console.log(event_.name);
-      // console.log("condicion del if " + event_.name.includes(nombre));
     }
 
   }
-  // console.log(lista);
+
   return lista;
 }
 
 
-
-
-// function checkboxFilter(lista, evento){
-//   let lista = [];
-
-//   for(event_ of evento){
-//     if(evento.category.toLowerCase().includes(lista)){
-
-//     }
-//   }
-// }
-
 search.addEventListener("keyup", (e) =>{
-  // if(checkedCategories.length === 0){
-  //   createAllCards(filtraPorNombre(search.value.toLowerCase(), eventsDB.events));
-  //   paintAllCards();
-  // }else{
-  //   createAllCards(filtraPorNombre(search.value.toLowerCase(), checkedEvents));
-  //   paintAllCards();
-  // }
+
   listenerValue = e.target.value;
   filterAlmacen();
 });
@@ -149,16 +101,9 @@ search.addEventListener("keyup", (e) =>{
 function filterAlmacen(){
   let filtradoPorSearchbar = events.filter(e => e.name.toLowerCase().includes(listenerValue));
   let filtradoPorCheckbar = events.filter(e => checkedCategories.includes(e.category));
-  
-  // console.log(filtradoPorSearchbar);
-  // console.log(filtradoPorCheckbar);
-  // console.log(filtradoPorCheckbar.forEach());
-  // console.log(events);
-  // console.log(checkedCategories);
+
 
   if(listenerValue.length > 0){
-    // createAllCards(filtradoPorSearchbar);
-    // paintAllCards();
     allCardsContainer.innerHTML = createAllCards(filtradoPorSearchbar);
     let controlFinal = filtradoPorSearchbar.filter(fs => fs.category.includes(checkedCategories.toString()));
     allCardsContainer.innerHTML = createAllCards(controlFinal);
@@ -188,10 +133,28 @@ function filterAlmacen(){
 
 //Calling the functions:
 
-createAllCards(events);
-paintAllCards();
+async function fetchingData(){
+  const datosFetched = await getData();
 
-createNoRepeatCategories();
-paintCategories();
+  try{
+  console.log(events)
+  createAllCards(eventsDB.events);
+  paintAllCards();
+
+  createAllCategories();
+
+  noRepeatCategories = removeDuplicates(allCategories);
+  createNoRepeatCategories();
+
+  paintCategories();
+
+  }catch(err){
+
+  }
+}
+
+
+fetchingData();
+
 
 
