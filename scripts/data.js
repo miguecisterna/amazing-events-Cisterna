@@ -463,6 +463,10 @@ async function getData(){
         eventsDB = datos;
         events = eventsDB.events;
 
+        createAllCategories();
+
+        noRepeatCategories = removeDuplicates(allCategories);
+
     } catch(err) {
         console.log('Ocurrio un error con la API 😫')
     }

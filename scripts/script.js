@@ -141,9 +141,9 @@ async function fetchingData(){
   createAllCards(eventsDB.events);
   paintAllCards();
 
-  createAllCategories();
 
-  noRepeatCategories = removeDuplicates(allCategories);
+
+  
   createNoRepeatCategories();
 
   paintCategories();
