@@ -1,4 +1,4 @@
-// Variables:
+//                                    ========================> Variables: <========================
 
 let statsEvents;
 let topEvents;
@@ -22,21 +22,40 @@ let byCapacity3 = document.getElementById("byCapacity3");
 
 // Upcoming Stats by Categories:
 
-let tableCont = document.getElementById("upEventsByCat");
+let tableUpCont = document.getElementById("upEventsByCat");
+let categoryStats = [];
+let categoriesPastStats = [];
 
+// Past Stats by Categories:
+
+let tablePastCont = document.getElementById("pastEventsByCat");
+
+
+
+//                                    =======================> Functions: <=======================
+
+
+//Getting the API Data and calling the fx's that depends on that data: 
 
 async function getStatsData(){
     const statsFetched = await getData();
     try{
-        //console.log(statsEvents);
         filterPastEvents(events);
         createTops(pastEvents);
         createEventsByCapacity(pastEvents);
         createUpEventsStatsByCat();
+        paintUpEventsStats();
+        createPastEventsStatsByCat();
+        paintPastEventsStats();
+        
     }catch(err){
 
     }
 }
+
+// ----------------  Events Statistics Top 3:
+
+//Creating the Top's Event Statistics:
 
 function createTops(arr){
 
@@ -61,11 +80,9 @@ function createTops(arr){
     bot2.innerText = eventsTopPercents[eventsTopPercents.length -2].name + " = " + Number.parseFloat(eventsTopPercents[eventsTopPercents.length -2].percentage).toFixed(2) + " %";
     bot3.innerText = eventsTopPercents[eventsTopPercents.length -3].name + " = " + Number.parseFloat(eventsTopPercents[eventsTopPercents.length -3].percentage).toFixed(2) + " %";
 
-    // console.log(eventsTopPercents[eventsTopPercents.length -1]);
-    // console.log(eventsTopPercents[eventsTopPercents.length -2]);
-    // console.log(eventsTopPercents[eventsTopPercents.length -3]);
-
 }
+
+// Filtering Events to get the Past ones: 
 
 function filterPastEvents(arr){
     
@@ -76,6 +93,8 @@ function filterPastEvents(arr){
     }
 }
 
+// Painting the Top 3 Events:
+
 function createEventsByCapacity(arr){
     arr.forEach(element => eventsByCapacity.push(element));
     eventsByCapacity.sort((a,b) => b.capacity - a.capacity);
@@ -85,14 +104,15 @@ function createEventsByCapacity(arr){
     byCapacity3.innerText = eventsByCapacity[2].name;
 }
 
+// ----------------  Upcoming Events Stats by Categories fx's:
+
 function createUpEventsStatsByCat(){
-    let categoryStats = [];
+
     let upcoming = [];
 
     events.forEach(event => {
         if(event.date > today){
             upcoming.push(event);
-            // console.log(upcoming);
         }        
     })
 
@@ -103,7 +123,7 @@ function createUpEventsStatsByCat(){
 
         for(let i = 0; i < upcoming.length; i++){
             if(upcoming[i].category == category){
-                
+
                 revenue = revenue + upcoming[i].price * upcoming[i].estimate;
                 atendance = atendance + upcoming[i].estimate;
                 capacity = capacity + upcoming[i].capacity;
@@ -115,40 +135,87 @@ function createUpEventsStatsByCat(){
             atendance = (atendance*100)/capacity
         }
         categoryStats.push({
-                            category: category,
-                            revenues: revenue,
-                            atendance: atendance,
-                            })
+            category: category,
+            revenues: revenue,
+            atendance: atendance
+        })
+    })
+}
+
+function paintUpEventsStats(){
+    categoryStats.forEach(category =>{
+        let inner = "";
+        inner += `
+        <tr>
+            <td> ${category.category}</td>
+            <td> ${category.revenues}</td>
+            <td> ${Number.parseFloat(category.atendance).toFixed(2)}%</td>
+        </tr>
+        `
+        tableUpCont.innerHTML += inner;
+    })
+    
+}
+
+// ------------------- Past Events Stats by categories fx's:
+
+function createPastEventsStatsByCat(){
+
+    let past = [];
+
+    
+
+    events.forEach(event => {
+        if(event.date < today){
+            past.push(event);
+        }        
     })
 
-    console.log(categoryStats);
+    // console.log(past)
 
-    // for(let i = 0; i < events.length; i++){
-    //     if(events[i].date > today){
-    //         upcoming.push(events[i]);
+    noRepeatCategories.forEach(category =>{
+        let revenue = 0;
+        let atendance = 0;
+        let capacity = 0;
+        // console.log("hasta acá llego")
 
-    //         for(let j = 0; j <= categoryStats.length; j++){
-    //             if(events[i].name != categoryStats[j].name){
-    //                 categoryStats.push({
-    //                     category: events[i].category,
-    //                     revenues: events[i].price * events[i].estimate,
-    //                     atendance: (events[i].estimate * 100) / events[i].capacity
-    //                 });
-    //             }
-    //             else if(categoryStats[j].name == events[i].name){
-    //                 categoryStats[j].revenues = categoryStats[j].revenues + (events[i].price * events[i].estimate);
-    //             }  
-    //             //console.log("entré")
-    //         }
+        for(let i = 0; i < past.length; i++){
+            if(past[i].category == category){
+                
+                revenue = revenue + past[i].price * past[i].assistance;
+                atendance = atendance + past[i].assistance;
+                capacity = capacity + past[i].capacity;
+                console.log("hasta acá llego")
+            }
+        }
+        if(capacity == 0){
+            atendance = 0;
+        }
+        else{
+            atendance = (atendance*100)/capacity
+        }
+        categoriesPastStats.push({
+            category: category,
+            revenues: revenue,
+            atendance: atendance
+        })
+    })
+    console.log(categoriesPastStats);
+}
 
-            
-
-    //     }
-
-    //     console.log(upcoming)
-    // }
-
-    // // console.log(upcoming);
+function paintPastEventsStats(){
+    categoriesPastStats.forEach(category =>{
+        let inner = "";
+        inner += `
+        <tr>
+            <td> ${category.category}</td>
+            <td> ${category.revenues}</td>
+            <td> ${Number.parseFloat(category.atendance).toFixed(2)}%</td>
+        </tr>
+        `
+        tablePastCont.innerHTML += inner;
+    })
+    
 }
 
 getStatsData();
