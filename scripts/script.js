@@ -137,15 +137,12 @@ async function fetchingData(){
   const datosFetched = await getData();
 
   try{
-  console.log(events)
+  // console.log(events)
+
   createAllCards(eventsDB.events);
   paintAllCards();
 
-
-
-  
   createNoRepeatCategories();
-
   paintCategories();
 
   }catch(err){

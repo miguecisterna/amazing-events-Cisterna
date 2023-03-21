@@ -30,6 +30,30 @@ let checkedevents = [];
 let checkedRefe = document.getElementById("allCategoriesContainer");
 
 
+
+
+// ---------------- Fetching Data --------------------
+
+async function fetchingUpcoming(){
+    const datosUpcomingFetched = await getData();
+
+    try{
+        console.log(events);
+        filterUpcomingEvents(eventsDB.events);
+        createUpcomingCards(upcomingEvents);
+        paintUpcomingCards();
+
+        createNoRepeatCategories();
+        paintCategories();
+    }catch(err){
+        console.log('Ocurrio un error con la API 😫')
+    }
+}
+
+
+//-----------------------------------------------------
+
+
 //Upcoming events cards display functions:
 
 function createUpcomingCards(arr) {
@@ -52,6 +76,7 @@ function createUpcomingCards(arr) {
     }
     return upcomingCards;
 }
+
 
 function filterUpcomingEvents(events){
     for(event_ of events){
@@ -156,9 +181,6 @@ function filterAlmacen(){
 
 //Calling the functions:
 
-filterUpcomingEvents(eventsDB.events);
-createUpcomingCards(upcomingEvents);
-paintUpcomingCards();
 
-createNoRepeatCategories();
-paintCategories();
+
+fetchingUpcoming();

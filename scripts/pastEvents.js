@@ -29,6 +29,28 @@ let checkedCategories = [];
 let checkedevents = [];
 let checkedRefe = document.getElementById("allCategoriesContainer");
 
+// ---------------- Fetching Data --------------------
+
+async function fetchingPast(){
+    const datosUpcomingFetched = await getData();
+
+    try{
+        console.log(events);
+        filterPastEvents(eventsDB.events);
+        createPastCards(pastEvents);
+        paintPastCards();
+
+        createNoRepeatCategories();
+        paintCategories();
+
+    }catch(err){
+        console.log('Ocurrio un error con la API 😫')
+    }
+}
+
+
+//-----------------------------------------------------
+
 //Past Events card display functions:
 
 function createPastCards(arr) {
@@ -153,10 +175,4 @@ function filterAlmacen(){
 
 //Calling the functions:
 
-filterPastEvents(eventsDB.events);
-createPastCards(pastEvents);
-paintPastCards();
-
-createNoRepeatCategories();
-paintCategories();
-
+fetchingPast();
